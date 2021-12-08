@@ -1,25 +1,30 @@
-input.onButtonPressed(Button.A, function () {
-    nachLinks()
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 1) {
+        nachLinks()
+    } else {
+        if (receivedNumber == 2) {
+            nachRechts()
+        }
+    }
 })
 function gerade () {
-    motors.dualMotorPower(Motor.AB, 56)
+    motors.dualMotorPower(Motor.AB, 100)
 }
 function nachLinks () {
     motors.dualMotorPower(Motor.A, 50)
     motors.dualMotorPower(Motor.B, 0)
-}
-input.onButtonPressed(Button.AB, function () {
+    basic.pause(500)
     gerade()
-})
-input.onButtonPressed(Button.B, function () {
-    nachRechts()
-})
+}
 function nachRechts () {
     motors.dualMotorPower(Motor.A, 0)
     motors.dualMotorPower(Motor.B, 50)
+    basic.pause(500)
+    gerade()
 }
+radio.setGroup(1)
 basic.showIcon(IconNames.Heart)
 basic.setLedColor(0x00ff00)
 basic.forever(function () {
-	
+    basic.showNumber(radio.receivedPacket(RadioPacketProperty.SignalStrength))
 })
