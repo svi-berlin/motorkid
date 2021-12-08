@@ -13,24 +13,40 @@ radio.onReceivedNumber(function (receivedNumber) {
     }
 })
 function gerade () {
-    if (modus == 0) {
-        modus = 1
+    if (modusGerade == 0) {
+        modusGerade = 1
         motors.dualMotorPower(Motor.AB, 50)
     } else {
-        modus = 0
+        modusGerade = 0
         motors.dualMotorPower(Motor.AB, 0)
     }
 }
 function nachLinks () {
-    motors.dualMotorPower(Motor.A, 50)
-    motors.dualMotorPower(Motor.B, 0)
+    if (modusLinks == 0) {
+        modusLinks = 1
+        motors.dualMotorPower(Motor.A, 50)
+        motors.dualMotorPower(Motor.B, 0)
+    } else {
+        modusLinks = 0
+        motors.dualMotorPower(Motor.AB, 0)
+    }
 }
 function nachRechts () {
-    motors.dualMotorPower(Motor.A, 0)
-    motors.dualMotorPower(Motor.B, 50)
+    if (modusRechts == 0) {
+        modusRechts = 1
+        motors.dualMotorPower(Motor.A, 0)
+        motors.dualMotorPower(Motor.B, 50)
+    } else {
+        modusRechts = 0
+        motors.dualMotorPower(Motor.AB, 0)
+    }
 }
-let modus = 0
-modus = 0
+let modusRechts = 0
+let modusLinks = 0
+let modusGerade = 0
+modusGerade = 0
+modusLinks = 0
+modusRechts = 0
 radio.setGroup(1)
 basic.showIcon(IconNames.Heart)
 basic.setLedColor(0x00ff00)
