@@ -55,14 +55,27 @@ modusGerade = 0
 modusLinks = 0
 modusRechts = 0
 radio.setGroup(1)
+gerade()
 basic.forever(function () {
     if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
-        basic.setLedColor(0xff0000)
+        if (modusRechts == 0) {
+            basic.setLedColor(0xff0000)
+            motorLeistung = 50
+            nachRechts()
+        }
     } else {
         if (grove.measureInCentimeters(DigitalPin.C16) < 100) {
-            basic.setLedColor(0xffff00)
+            if (modusLinks == 0) {
+                basic.setLedColor(0xffff00)
+                motorLeistung = 50
+                nachLinks()
+            }
         } else {
-            basic.setLedColor(0x00ff00)
+            if (modusGerade == 0) {
+                basic.setLedColor(0x00ff00)
+                motorLeistung = 70
+                gerade()
+            }
         }
     }
 })
