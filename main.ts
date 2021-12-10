@@ -1,10 +1,9 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    basic.showNumber(receivedNumber)
     if (receivedNumber == 1) {
-        nachLinks()
+        nachRechts()
     } else {
         if (receivedNumber == 2) {
-            nachRechts()
+            nachLinks()
         } else {
             if (receivedNumber == 3) {
                 gerade()
@@ -13,18 +12,22 @@ radio.onReceivedNumber(function (receivedNumber) {
     }
 })
 function gerade () {
+    modusLinks = 0
+    modusRechts = 0
     if (modusGerade == 0) {
         modusGerade = 1
-        motors.dualMotorPower(Motor.AB, 50)
+        motors.dualMotorPower(Motor.AB, motorLeistung)
     } else {
         modusGerade = 0
         motors.dualMotorPower(Motor.AB, 0)
     }
 }
 function nachLinks () {
+    modusRechts = 0
+    modusGerade = 0
     if (modusLinks == 0) {
         modusLinks = 1
-        motors.dualMotorPower(Motor.A, 50)
+        motors.dualMotorPower(Motor.A, motorLeistung)
         motors.dualMotorPower(Motor.B, 0)
     } else {
         modusLinks = 0
@@ -32,10 +35,12 @@ function nachLinks () {
     }
 }
 function nachRechts () {
+    modusLinks = 0
+    modusGerade = 0
     if (modusRechts == 0) {
         modusRechts = 1
         motors.dualMotorPower(Motor.A, 0)
-        motors.dualMotorPower(Motor.B, 50)
+        motors.dualMotorPower(Motor.B, motorLeistung)
     } else {
         modusRechts = 0
         motors.dualMotorPower(Motor.AB, 0)
@@ -44,12 +49,12 @@ function nachRechts () {
 let modusRechts = 0
 let modusLinks = 0
 let modusGerade = 0
+let motorLeistung = 0
+motorLeistung = 100
 modusGerade = 0
 modusLinks = 0
 modusRechts = 0
 radio.setGroup(1)
-basic.showIcon(IconNames.Heart)
-basic.setLedColor(0x00ff00)
 basic.forever(function () {
-    basic.showNumber(radio.receivedPacket(RadioPacketProperty.SignalStrength))
+	
 })
