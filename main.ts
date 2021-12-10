@@ -57,6 +57,7 @@ modusRechts = 0
 radio.setGroup(1)
 gerade()
 basic.forever(function () {
+    basic.showNumber(grove.measureInCentimeters(DigitalPin.C16))
     if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
         if (modusRechts == 0) {
             basic.setLedColor(0xff0000)
@@ -73,7 +74,7 @@ basic.forever(function () {
         } else {
             if (modusGerade == 0) {
                 basic.setLedColor(0x00ff00)
-                motorLeistung = 70
+                motorLeistung = 80
                 gerade()
             }
         }
