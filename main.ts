@@ -46,6 +46,7 @@ function nachRechts () {
         motors.dualMotorPower(Motor.AB, 0)
     }
 }
+let distanz = 0
 let modusRechts = 0
 let modusLinks = 0
 let modusGerade = 0
@@ -57,26 +58,15 @@ modusRechts = 0
 radio.setGroup(1)
 gerade()
 basic.forever(function () {
-    basic.showNumber(grove.measureInCentimeters(DigitalPin.C16))
-    if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
-        if (modusRechts == 0) {
-            basic.setLedColor(0xff0000)
-            motorLeistung = 50
-            nachRechts()
-        }
+    distanz = grove.measureInCentimeters(DigitalPin.C16)
+    basic.showNumber(distanz)
+    if (distanz < 50) {
+        nachRechts()
     } else {
-        if (grove.measureInCentimeters(DigitalPin.C16) < 100) {
-            if (modusLinks == 0) {
-                basic.setLedColor(0xffff00)
-                motorLeistung = 50
-                nachLinks()
-            }
+        if (distanz < 100) {
+            nachLinks()
         } else {
-            if (modusGerade == 0) {
-                basic.setLedColor(0x00ff00)
-                motorLeistung = 80
-                gerade()
-            }
+            gerade()
         }
     }
 })
