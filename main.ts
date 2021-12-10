@@ -59,12 +59,10 @@ basic.forever(function () {
     if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
         basic.setLedColor(0xff0000)
     } else {
-        if (grove.measureInCentimeters(DigitalPin.C16) > 50 && grove.measureInCentimeters(DigitalPin.C16) < 100) {
+        if (grove.measureInCentimeters(DigitalPin.C16) < 100) {
             basic.setLedColor(0xffff00)
         } else {
-            if (grove.measureInCentimeters(DigitalPin.C16) > 100) {
-                basic.setLedColor(0x00ff00)
-            }
+            basic.setLedColor(0x00ff00)
         }
     }
 })
