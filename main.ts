@@ -50,11 +50,21 @@ let modusRechts = 0
 let modusLinks = 0
 let modusGerade = 0
 let motorLeistung = 0
-motorLeistung = 100
+motorLeistung = 60
 modusGerade = 0
 modusLinks = 0
 modusRechts = 0
 radio.setGroup(1)
 basic.forever(function () {
-	
+    if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
+        basic.setLedColor(0xff0000)
+    } else {
+        if (grove.measureInCentimeters(DigitalPin.C16) > 50 && grove.measureInCentimeters(DigitalPin.C16) < 100) {
+            basic.setLedColor(0xffff00)
+        } else {
+            if (grove.measureInCentimeters(DigitalPin.C16) > 100) {
+                basic.setLedColor(0x00ff00)
+            }
+        }
+    }
 })
