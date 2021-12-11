@@ -2,12 +2,12 @@ function gerade () {
     motors.dualMotorPower(Motor.AB, motorLeistung)
 }
 function nachLinks () {
-    motors.dualMotorPower(Motor.A, motorLeistung)
+    motors.dualMotorPower(Motor.A, 100)
     motors.dualMotorPower(Motor.B, 0)
 }
 function nachRechts () {
     motors.dualMotorPower(Motor.A, 0)
-    motors.dualMotorPower(Motor.B, motorLeistung)
+    motors.dualMotorPower(Motor.B, 100)
 }
 let motorLeistung = 0
 motorLeistung = 60
