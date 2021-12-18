@@ -1,3 +1,14 @@
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 1) {
+        motors.dualMotorPower(Motor.A, 100)
+        motors.dualMotorPower(Motor.B, 0)
+    } else {
+        if (receivedNumber == 2) {
+            motors.dualMotorPower(Motor.A, 0)
+            motors.dualMotorPower(Motor.B, 100)
+        }
+    }
+})
 function gerade () {
     ausweichen = 0
     motors.dualMotorPower(Motor.AB, motorLeistung)
