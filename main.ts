@@ -1,4 +1,5 @@
 radio.onReceivedNumber(function (receivedNumber) {
+    remoteControl = 1
     if (receivedNumber == 1) {
         motors.dualMotorPower(Motor.A, 100)
         motors.dualMotorPower(Motor.B, 0)
@@ -6,6 +7,8 @@ radio.onReceivedNumber(function (receivedNumber) {
         if (receivedNumber == 2) {
             motors.dualMotorPower(Motor.A, 0)
             motors.dualMotorPower(Motor.B, 100)
+        } else {
+            motors.dualMotorPower(Motor.AB, motorLeistung)
         }
     }
 })
@@ -39,21 +42,25 @@ function nachRechts () {
         motors.dualMotorPower(Motor.B, 100)
     }
 }
+let remoteControl = 0
 let ausweichen = 0
 let motorLeistung = 0
 motorLeistung = 100
 ausweichen = 0
+remoteControl = 0
 basic.forever(function () {
-    if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
-        basic.setLedColor(0xff0000)
-        nachRechts()
-    } else {
-        if (grove.measureInCentimeters(DigitalPin.C16) < 80) {
-            basic.setLedColor(0xffff00)
-            nachLinks()
+    if (remoteControl == 0) {
+        if (grove.measureInCentimeters(DigitalPin.C16) < 50) {
+            basic.setLedColor(0xff0000)
+            nachRechts()
         } else {
-            basic.setLedColor(0x00ff00)
-            gerade()
+            if (grove.measureInCentimeters(DigitalPin.C16) < 80) {
+                basic.setLedColor(0xffff00)
+                nachLinks()
+            } else {
+                basic.setLedColor(0x00ff00)
+                gerade()
+            }
         }
     }
 })
