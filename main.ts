@@ -1,14 +1,35 @@
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 1) {
+        motors.dualMotorPower(Motor.A, 0)
+        basic.pause(500)
+        motors.dualMotorPower(Motor.A, 100)
+    } else {
+        if (receivedNumber == 2) {
+            motors.dualMotorPower(Motor.B, 0)
+            basic.pause(500)
+            motors.dualMotorPower(Motor.B, 100)
+        } else {
+            if (receivedNumber == 3) {
+                motors.dualMotorPower(Motor.A, 0)
+                motors.dualMotorPower(Motor.B, 0)
+            } else {
+                if (receivedNumber == 4) {
+                    motors.dualMotorPower(Motor.A, 100)
+                    motors.dualMotorPower(Motor.B, 100)
+                }
+            }
+        }
+    }
+})
 function gerade () {
     motors.dualMotorPower(Motor.AB, motorLeistung)
     ausweichen = 0
-    basic.showNumber(ausweichen)
 }
 function nachLinks () {
     if (ausweichen < 5) {
         motors.dualMotorPower(Motor.A, 100)
         motors.dualMotorPower(Motor.B, 0)
         ausweichen += 1
-        basic.showNumber(ausweichen)
     } else {
         ausweichen = 0
         nachRechts()
@@ -19,7 +40,6 @@ function nachRechts () {
         motors.dualMotorPower(Motor.A, 0)
         motors.dualMotorPower(Motor.B, 100)
         ausweichen += 1
-        basic.showNumber(ausweichen)
     } else {
         ausweichen = 0
         nachLinks()
@@ -27,6 +47,7 @@ function nachRechts () {
 }
 let ausweichen = 0
 let motorLeistung = 0
+radio.setGroup(1)
 motorLeistung = 100
 ausweichen = 0
 basic.forever(function () {
