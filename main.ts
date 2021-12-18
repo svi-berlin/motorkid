@@ -1,10 +1,15 @@
 radio.onReceivedNumber(function (receivedNumber) {
     remoteControl = 1
+    basic.showNumber(receivedNumber)
     if (receivedNumber == 1) {
         motors.dualMotorPower(Motor.A, 0)
+        motors.dualMotorPower(Motor.B, motorLeistung)
+        beideMotorenStandard()
     } else {
         if (receivedNumber == 2) {
             motors.dualMotorPower(Motor.B, 0)
+            motors.dualMotorPower(Motor.A, motorLeistung)
+            beideMotorenStandard()
         } else {
             if (receivedNumber == 3) {
                 motors.dualMotorPower(Motor.A, 0)
@@ -13,6 +18,7 @@ radio.onReceivedNumber(function (receivedNumber) {
                 if (receivedNumber == 4) {
                     motors.dualMotorPower(Motor.A, 100)
                     motors.dualMotorPower(Motor.B, 100)
+                    beideMotorenStandard()
                 }
             }
         }
@@ -32,6 +38,11 @@ function nachLinks () {
         nachRechts()
     }
 }
+function beideMotorenStandard () {
+    basic.pause(1000)
+    motors.dualMotorPower(Motor.A, motorLeistung)
+    motors.dualMotorPower(Motor.B, motorLeistung)
+}
 function nachRechts () {
     if (ausweichen < 5) {
         motors.dualMotorPower(Motor.A, 0)
@@ -46,7 +57,7 @@ let remoteControl = 0
 let ausweichen = 0
 let motorLeistung = 0
 radio.setGroup(1)
-motorLeistung = 100
+motorLeistung = 60
 ausweichen = 0
 remoteControl = 0
 basic.forever(function () {
@@ -64,5 +75,4 @@ basic.forever(function () {
             }
         }
     }
-    basic.showNumber(remoteControl)
 })
